@@ -19,6 +19,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class ReaderToKindle {
         String userId = googleReader.getUserInformation().getUserId();
         String feedId = "user/" + userId + PropertiesUtil.getProperty("kindle.reader.rss.label");
         String data = googleReader.getApi().getUnreadItems(feedId, 1000);
-        googleReader.markFeedAsRead(feedId);
+        //        googleReader.markFeedAsRead(feedId);
         return data;
     }
 
@@ -100,6 +101,8 @@ public class ReaderToKindle {
     }
 
     private void sendToEmail(String document) throws IOException {
-        new SendMailSSL().send(document);
+        PrintWriter out = new PrintWriter("d:/k.html");
+        out.println(document);
+//        new SendMailSSL().send(document);
     }
 }
