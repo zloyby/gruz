@@ -1,11 +1,10 @@
 package by.zloy.util;
 
-import java.util.Calendar;
+import java.text.DateFormat;
+import java.util.Date;
 
 public class CalendarUtil {
     public static String getDate() {
-        return Calendar.getInstance().get(Calendar.DATE)
-                + "-" + Calendar.getInstance().get(Calendar.MONTH)
-                + "-" + Calendar.getInstance().get(Calendar.YEAR);
+        return DateFormat.getDateInstance(DateFormat.LONG).format(new Date());
     }
 }
