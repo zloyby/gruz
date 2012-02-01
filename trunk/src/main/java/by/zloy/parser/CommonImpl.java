@@ -19,9 +19,9 @@ public class CommonImpl implements Common {
 
     public String createDocumentBody(Entry entry) {
         StringBuilder sb = new StringBuilder();
-        sb.append("<div><h2>")
+        sb.append("<div><h3>")
                 .append(entry.getTitle())
-                .append("</h2>")
+                .append("</h3>")
                 .append(entry.getSummary())
                 .append("</div><hr/>");
         return sb.toString();
