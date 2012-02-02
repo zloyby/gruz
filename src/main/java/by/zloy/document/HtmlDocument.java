@@ -54,7 +54,7 @@ public class HtmlDocument implements Document {
 
     private File doZip(File innerFile) throws IOException {
         File zipFile = new File(System.getProperty("java.io.tmpdir") + CalendarUtil.getTitleWithDate() + ".zip");
-        innerFile.deleteOnExit();
+        zipFile.deleteOnExit();
 
         byte[] buf = new byte[1024];
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFile));
