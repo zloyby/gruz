@@ -33,7 +33,7 @@ public class HtmlDocument implements Document {
         return "</body></html>";
     }
 
-    public HtmlDocument(List<Entry> entries) throws IOException {
+    public HtmlDocument(List<Entry> entries) {
         StringBuilder sb = new StringBuilder();
         sb.append(createDocumentHeader());
         for (Entry entry : entries) {
@@ -43,7 +43,6 @@ public class HtmlDocument implements Document {
         }
         sb.append(createDocumentFooter());
         data = sb.toString();
-        getFile();
     }
 
     public File getFile() throws IOException {
