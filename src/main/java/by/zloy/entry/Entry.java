@@ -1,4 +1,4 @@
-package by.zloy.model;
+package by.zloy.entry;
 
 public class Entry {
 

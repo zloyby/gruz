@@ -1,6 +1,6 @@
-package by.zloy.parser;
+package by.zloy.entry.parser;
 
-import by.zloy.model.Entry;
+import by.zloy.entry.Entry;
 
 public class CommonParserImpl implements CommonParser {
 

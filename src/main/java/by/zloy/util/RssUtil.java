@@ -1,7 +1,8 @@
-package by.zloy.model;
+package by.zloy.util;
 
-import by.zloy.parser.CommonParser;
-import by.zloy.parser.CommonParserImpl;
+import by.zloy.entry.Entry;
+import by.zloy.entry.parser.CommonParser;
+import by.zloy.entry.parser.CommonParserImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -16,19 +17,20 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum Rss {
-    HABRAHABR("http://www.habrahabr.ru/rss/main/", by.zloy.parser.Habrahabr.class);
+@SuppressWarnings({ "UnusedDeclaration" })
+public enum RssUtil {
+    HABRAHABR("http://www.habrahabr.ru/rss/main/", by.zloy.entry.parser.Habrahabr.class);
 
     private String url;
     private Class<? extends CommonParser> parserClass;
 
-    Rss(String url, Class<? extends CommonParser> parserClass) {
+    RssUtil(String url, Class<? extends CommonParser> parserClass) {
         this.url = url;
         this.parserClass = parserClass;
     }
 
     public static CommonParser getParserClass(String href) {
-        for (Rss rss : Rss.values()) {
+        for (RssUtil rss : RssUtil.values()) {
             if (rss.url.equalsIgnoreCase(href)) {
                 try {
                     return rss.parserClass.newInstance();
