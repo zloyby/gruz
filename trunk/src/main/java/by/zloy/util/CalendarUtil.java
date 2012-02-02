@@ -1,10 +1,16 @@
 package by.zloy.util;
 
-import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CalendarUtil {
+
     public static String getDate() {
-        return DateFormat.getDateInstance(DateFormat.LONG).format(new Date());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH-mm");
+        return format.format(new Date());
+    }
+
+    public static String getTitleWithDate() {
+        return "Google Reader [" + getDate() + "]";
     }
 }

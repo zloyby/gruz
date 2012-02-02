@@ -2,6 +2,6 @@ package by.zloy.parser;
 
 import by.zloy.model.Entry;
 
-public interface Common {
+public interface CommonParser {
     String createDocumentBody(Entry entry);
 }
