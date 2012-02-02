@@ -40,17 +40,17 @@ public class ReaderToKindle {
                 // Send document to @kindle.com for convert
                 sendToEmail(document);
             }
-        } catch (AuthenticationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
+        } catch (EmailException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
-        } catch (GoogleReaderException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (EmailException e) {
+        } catch (GoogleReaderException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (AuthenticationException e) {
             e.printStackTrace();
         }
     }
@@ -102,9 +102,8 @@ public class ReaderToKindle {
      *
      * @param entries list of rss
      * @return document
-     * @throws java.io.IOException ex
      */
-    private Document createDocument(List<Entry> entries) throws IOException {
+    private Document createDocument(List<Entry> entries) {
         return new HtmlDocument(entries);
     }
 

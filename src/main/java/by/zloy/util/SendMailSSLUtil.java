@@ -6,6 +6,7 @@ import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 
+import java.io.File;
 import java.io.IOException;
 
 public class SendMailSSLUtil {
@@ -21,11 +22,12 @@ public class SendMailSSLUtil {
         email.setAuthenticator(new DefaultAuthenticator(PropertiesUtil.getProperty("auth.mail"),
                                                         PropertiesUtil.getProperty("auth.password")));
 
+        File attachFile = document.getFile();
         EmailAttachment attachment = new EmailAttachment();
-        attachment.setPath(document.getFile().getPath());
+        attachment.setPath(attachFile.getPath());
         attachment.setDisposition(EmailAttachment.ATTACHMENT);
-        attachment.setDescription(document.getFile().getName());
-        attachment.setName(document.getFile().getName());
+        attachment.setDescription(attachFile.getName());
+        attachment.setName(attachFile.getName());
         email.attach(attachment);
 
         email.send();
