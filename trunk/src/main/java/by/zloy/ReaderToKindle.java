@@ -79,7 +79,7 @@ public class ReaderToKindle {
         String userId = googleReader.getUserInformation().getUserId();
         String feedId = "user/" + userId + PropertiesUtil.getProperty("kindle.reader.rss.label");
         String data = googleReader.getApi().getUnreadItems(feedId, 1000);
-        googleReader.markFeedAsRead(feedId);
+        //googleReader.markFeedAsRead(feedId);
         return data;
     }
 

@@ -46,21 +46,15 @@ public class HtmlDocument implements Document {
     }
 
     public File getFile() throws IOException {
-// TODO: do not create files
-//        File innerFile = File.createTempFile(CalendarUtil.getTitleWithDate(), "html");
-//        innerFile.deleteOnExit();
-
-        File innerFile = new File("d:/" + CalendarUtil.getTitleWithDate() + ".html");
+        File innerFile = new File(System.getProperty("java.io.tmpdir") + CalendarUtil.getTitleWithDate() + ".htm");
         FileUtils.writeStringToFile(innerFile, data);
+        innerFile.deleteOnExit();
         return doZip(innerFile);
     }
 
     private File doZip(File innerFile) throws IOException {
-// TODO: do not create files
-//        File zipFile = File.createTempFile(CalendarUtil.getTitleWithDate(), "zip");
-//        innerFile.deleteOnExit();
-
-        File zipFile = new File("d:/" + CalendarUtil.getTitleWithDate() + ".zip");
+        File zipFile = new File(System.getProperty("java.io.tmpdir") + CalendarUtil.getTitleWithDate() + ".zip");
+        innerFile.deleteOnExit();
 
         byte[] buf = new byte[1024];
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFile));

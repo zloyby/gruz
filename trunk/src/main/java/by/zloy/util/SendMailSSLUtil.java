@@ -26,8 +26,8 @@ public class SendMailSSLUtil {
         EmailAttachment attachment = new EmailAttachment();
         attachment.setPath(attachFile.getPath());
         attachment.setDisposition(EmailAttachment.ATTACHMENT);
-        attachment.setDescription(attachFile.getName());
-        attachment.setName(attachFile.getName());
+        attachment.setDescription(CalendarUtil.getTitleWithDate());
+        attachment.setName(CalendarUtil.getTitleWithDate() + ".zip");
         email.attach(attachment);
 
         email.send();
