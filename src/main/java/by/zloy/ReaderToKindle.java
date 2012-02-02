@@ -3,37 +3,29 @@ package by.zloy;
 import be.lechtitseb.google.reader.api.core.GoogleReader;
 import be.lechtitseb.google.reader.api.model.exception.AuthenticationException;
 import be.lechtitseb.google.reader.api.model.exception.GoogleReaderException;
+import by.zloy.document.Document;
+import by.zloy.document.HtmlDocument;
 import by.zloy.model.Entry;
 import by.zloy.model.Rss;
-import by.zloy.parser.Common;
-import by.zloy.parser.CommonImpl;
 import by.zloy.util.PropertiesUtil;
-import by.zloy.util.SendMailSSL;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+import by.zloy.util.SendMailSSLUtil;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.mail.MessagingException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderToKindle {
 
     public static void main(String[] args)
             throws IOException, AuthenticationException, GoogleReaderException, SAXException,
-            ParserConfigurationException {
+            ParserConfigurationException, MessagingException {
         new ReaderToKindle().run();
     }
 
     private void run() throws IOException, AuthenticationException, GoogleReaderException, SAXException,
-            ParserConfigurationException {
+            ParserConfigurationException, MessagingException {
 
         // Init
         GoogleReader googleReader = initReader();
@@ -46,13 +38,19 @@ public class ReaderToKindle {
 
         if (!entries.isEmpty()) {
             // Create document to send
-            String document = createDocument(entries);
+            Document document = createDocument(entries);
 
             // Send document to @kindle.com for convert
             sendToEmail(document);
         }
     }
 
+    /**
+     * Initialization
+     *
+     * @return reader
+     * @throws AuthenticationException ex
+     */
     private GoogleReader initReader() throws AuthenticationException {
         GoogleReader googleReader = new GoogleReader(PropertiesUtil.getProperty("auth.mail"),
                                                      PropertiesUtil.getProperty("auth.password"));
@@ -60,6 +58,13 @@ public class ReaderToKindle {
         return googleReader;
     }
 
+    /**
+     * Get string of unreaded rss
+     *
+     * @param googleReader reader
+     * @return string
+     * @throws GoogleReaderException ex
+     */
     private String getRssData(GoogleReader googleReader) throws GoogleReaderException {
         String userId = googleReader.getUserInformation().getUserId();
         String feedId = "user/" + userId + PropertiesUtil.getProperty("kindle.reader.rss.label");
@@ -68,41 +73,39 @@ public class ReaderToKindle {
         return data;
     }
 
+    /**
+     * Parsing string of data to list of entries
+     *
+     * @param data string
+     * @return list of entries
+     * @throws ParserConfigurationException ex
+     * @throws SAXException ex
+     * @throws IOException ex
+     */
     private List<Entry> parseRss(String data) throws ParserConfigurationException, SAXException, IOException {
-        List<Entry> entries = new ArrayList<Entry>();
-        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        InputSource is = new InputSource();
-        is.setCharacterStream(new StringReader(data));
-
-        Document doc = db.parse(is);
-        NodeList nodes = doc.getElementsByTagName("entry");
-        for (int i = 0; i < nodes.getLength(); i++) {
-            String title = ((Element)nodes.item(i)).getElementsByTagName("title").item(0).getFirstChild().getTextContent();
-            String href = ((Element)nodes.item(i)).getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getFirstChild().getTextContent();
-            String summary = ((Element)nodes.item(i)).getElementsByTagName("summary").item(0).getFirstChild().getTextContent();
-            String source = ((Element)((Element)nodes.item(i)).getElementsByTagName("source").item(0)).getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getFirstChild().getTextContent();
-
-            Entry entry = new Entry(title, href, summary, source);
-            entries.add(entry);
-        }
-        return entries;
+        return Rss.parseRssString(data);
     }
 
-    private String createDocument(List<Entry> entries) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(CommonImpl.createDocumentHeader());
-        for (Entry entry : entries) {
-            String href = entry.getSource();
-            Common common = Rss.getParserClass(href);
-            sb.append(common.createDocumentBody(entry));
-        }
-        sb.append(CommonImpl.createDocumentFooter());
-        return sb.toString();
+    /**
+     * Method for choose document to create and send (html, doc, etc.)
+     * Now implemented only HTML documents.
+     *
+     * @param entries list of rss
+     * @return document
+     * @throws java.io.IOException ex
+     */
+    private Document createDocument(List<Entry> entries) throws IOException {
+        return new HtmlDocument(entries);
     }
 
-    private void sendToEmail(String document) throws IOException {
-        PrintWriter out = new PrintWriter("d:/k.html");
-        out.println(document);
-//        new SendMailSSL().send(document);
+    /**
+     * Sent to email
+     *
+     * @param document doc
+     * @throws MessagingException ex
+     * @throws java.io.IOException ex
+     */
+    private void sendToEmail(Document document) throws MessagingException, IOException {
+        SendMailSSLUtil.send(document, "");
     }
 }
