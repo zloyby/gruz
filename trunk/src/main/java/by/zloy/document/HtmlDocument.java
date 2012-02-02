@@ -1,8 +1,8 @@
 package by.zloy.document;
 
-import by.zloy.model.Entry;
-import by.zloy.model.Rss;
-import by.zloy.parser.CommonParser;
+import by.zloy.entry.Entry;
+import by.zloy.util.RssUtil;
+import by.zloy.entry.parser.CommonParser;
 import by.zloy.util.CalendarUtil;
 import org.apache.commons.io.FileUtils;
 
@@ -38,7 +38,7 @@ public class HtmlDocument implements Document {
         sb.append(createDocumentHeader());
         for (Entry entry : entries) {
             String href = entry.getSource();
-            CommonParser commonParser = Rss.getParserClass(href);
+            CommonParser commonParser = RssUtil.getParserClass(href);
             sb.append(commonParser.createDocumentBody(entry));
         }
         sb.append(createDocumentFooter());
@@ -47,6 +47,7 @@ public class HtmlDocument implements Document {
     }
 
     public File getFile() throws IOException {
+// TODO: do not create files
 //        File innerFile = File.createTempFile(CalendarUtil.getTitleWithDate(), "html");
 //        innerFile.deleteOnExit();
 
@@ -56,6 +57,7 @@ public class HtmlDocument implements Document {
     }
 
     private File doZip(File innerFile) throws IOException {
+// TODO: do not create files
 //        File zipFile = File.createTempFile(CalendarUtil.getTitleWithDate(), "zip");
 //        innerFile.deleteOnExit();
 

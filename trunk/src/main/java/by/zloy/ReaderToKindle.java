@@ -5,43 +5,53 @@ import be.lechtitseb.google.reader.api.model.exception.AuthenticationException;
 import be.lechtitseb.google.reader.api.model.exception.GoogleReaderException;
 import by.zloy.document.Document;
 import by.zloy.document.HtmlDocument;
-import by.zloy.model.Entry;
-import by.zloy.model.Rss;
+import by.zloy.entry.Entry;
+import by.zloy.util.RssUtil;
 import by.zloy.util.PropertiesUtil;
 import by.zloy.util.SendMailSSLUtil;
+import org.apache.commons.mail.EmailException;
 import org.xml.sax.SAXException;
 
-import javax.mail.MessagingException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
 
 public class ReaderToKindle {
 
-    public static void main(String[] args)
-            throws IOException, AuthenticationException, GoogleReaderException, SAXException,
-            ParserConfigurationException, MessagingException {
+    public static void main(String[] args) {
         new ReaderToKindle().run();
     }
 
-    private void run() throws IOException, AuthenticationException, GoogleReaderException, SAXException,
-            ParserConfigurationException, MessagingException {
+    private void run() {
+        try {
+            // Init
+            GoogleReader googleReader = initReader();
 
-        // Init
-        GoogleReader googleReader = initReader();
+            // Get new entries from reader
+            String data = getRssData(googleReader);
 
-        // Get new entries from reader
-        String data = getRssData(googleReader);
+            // Parse RSS
+            List<Entry> entries = parseRss(data);
 
-        // Parse RSS
-        List<Entry> entries = parseRss(data);
+            if (!entries.isEmpty()) {
+                // Create document to send
+                Document document = createDocument(entries);
 
-        if (!entries.isEmpty()) {
-            // Create document to send
-            Document document = createDocument(entries);
-
-            // Send document to @kindle.com for convert
-            sendToEmail(document);
+                // Send document to @kindle.com for convert
+                sendToEmail(document);
+            }
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (GoogleReaderException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (EmailException e) {
+            e.printStackTrace();
         }
     }
 
@@ -69,7 +79,7 @@ public class ReaderToKindle {
         String userId = googleReader.getUserInformation().getUserId();
         String feedId = "user/" + userId + PropertiesUtil.getProperty("kindle.reader.rss.label");
         String data = googleReader.getApi().getUnreadItems(feedId, 1000);
-        //        googleReader.markFeedAsRead(feedId);
+        googleReader.markFeedAsRead(feedId);
         return data;
     }
 
@@ -79,11 +89,11 @@ public class ReaderToKindle {
      * @param data string
      * @return list of entries
      * @throws ParserConfigurationException ex
-     * @throws SAXException ex
-     * @throws IOException ex
+     * @throws SAXException                 ex
+     * @throws IOException                  ex
      */
     private List<Entry> parseRss(String data) throws ParserConfigurationException, SAXException, IOException {
-        return Rss.parseRssString(data);
+        return RssUtil.parseRssString(data);
     }
 
     /**
@@ -102,10 +112,10 @@ public class ReaderToKindle {
      * Sent to email
      *
      * @param document doc
-     * @throws MessagingException ex
+     * @throws EmailException  ex
      * @throws java.io.IOException ex
      */
-    private void sendToEmail(Document document) throws MessagingException, IOException {
+    private void sendToEmail(Document document) throws IOException, EmailException {
         SendMailSSLUtil.send(document, "");
     }
 }
