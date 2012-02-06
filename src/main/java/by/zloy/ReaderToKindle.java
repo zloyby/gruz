@@ -24,21 +24,18 @@ public class ReaderToKindle {
 
     private void run() {
         try {
-            // Init
+            System.out.println("Start ReaderToKindle...");
             GoogleReader googleReader = initReader();
-
-            // Get new entries from reader
+            System.out.println("Auth successful...");
             String data = getRssData(googleReader);
-
-            // Parse RSS
+            System.out.println("Get data from reader of " + data.length() + " symbols...");
             List<Entry> entries = parseRss(data);
-
+            System.out.println("Convert data to  " + entries.size() + " entries...");
             if (!entries.isEmpty()) {
-                // Create document to send
                 Document document = createDocument(entries);
-
-                // Send document to @kindle.com for convert
+                System.out.println("Create document...");
                 sendToEmail(document);
+                System.out.println("Send to email and finish...");
             }
         } catch (EmailException e) {
             e.printStackTrace();
@@ -78,8 +75,10 @@ public class ReaderToKindle {
     private String getRssData(GoogleReader googleReader) throws GoogleReaderException {
         String userId = googleReader.getUserInformation().getUserId();
         String feedId = "user/" + userId + PropertiesUtil.getProperty("kindle.reader.rss.label");
-        String data = googleReader.getApi().getUnreadItems(feedId, 1000);
-        //googleReader.markFeedAsRead(feedId);
+        String data = googleReader.getApi().getUnreadItems(feedId, Integer.parseInt(PropertiesUtil.getProperty("kindle.reader.count.new.rss")));
+        if (Boolean.parseBoolean(PropertiesUtil.getProperty("kindle.reader.make.unread"))) {
+            googleReader.markFeedAsRead(feedId);
+        }
         return data;
     }
 

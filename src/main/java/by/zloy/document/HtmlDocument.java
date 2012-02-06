@@ -59,7 +59,7 @@ public class HtmlDocument implements Document {
         byte[] buf = new byte[1024];
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFile));
         FileInputStream in = new FileInputStream(innerFile);
-        out.putNextEntry(new ZipEntry(innerFile.getPath()));
+        out.putNextEntry(new ZipEntry(innerFile.getName()));
 
         int len;
         while ((len = in.read(buf)) > 0) {
