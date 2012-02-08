@@ -1,0 +1,6 @@
+#NOTE: This is an internal implementation file, its format can be changed without prior notice.
+#Wed Feb 08 18:33:23 AST 2012
+reader.api-0.1-SNAPSHOT.jar>=
+reader.api-0.1-SNAPSHOT-sources.jar>=
+reader.api-0.1-SNAPSHOT.pom>=
+reader.api-0.1-SNAPSHOT-javadoc.jar>=
