@@ -15,7 +15,7 @@
         <repository>
             <id>be.lechtitseb.google</id>
             <name>Google Reader Unofficial API</name>
-            <url>http://gruz.googlecode.com/svn/trunk/</url>
+            <url>http://gruz.googlecode.com/svn/trunk/repository/</url>
         </repository>
     </repositories>
 
