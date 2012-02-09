@@ -2,8 +2,12 @@ package by.zloy.entry.parser;
 
 import by.zloy.entry.Entry;
 
-public class CommonParserImpl implements CommonParser {
-
+/**
+ * User: ArthurPoleshchuk
+ * Date: 2/9/12
+ * Time: 11:57 AM
+ */
+public class LiveJournal implements CommonParser {
     public String createDocumentBody(Entry entry) {
         StringBuilder sb = new StringBuilder();
         sb.append("<div><h3>")
@@ -15,6 +19,6 @@ public class CommonParserImpl implements CommonParser {
     }
 
     public boolean isInPoint(String criteria) {
-        return false;
+        return criteria != null && criteria.contains("livejournal.com");
     }
 }
