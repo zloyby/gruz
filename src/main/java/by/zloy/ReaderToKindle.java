@@ -9,6 +9,7 @@ import by.zloy.entry.Entry;
 import by.zloy.util.RssUtil;
 import by.zloy.util.PropertiesUtil;
 import by.zloy.util.SendMailSSLUtil;
+import com.sun.syndication.io.FeedException;
 import org.apache.commons.mail.EmailException;
 import org.xml.sax.SAXException;
 
@@ -39,15 +40,13 @@ public class ReaderToKindle {
             }
         } catch (EmailException e) {
             e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (GoogleReaderException e) {
             e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
         } catch (AuthenticationException e) {
+            e.printStackTrace();
+        } catch (FeedException e) {
             e.printStackTrace();
         }
     }
@@ -60,7 +59,7 @@ public class ReaderToKindle {
      */
     private GoogleReader initReader() throws AuthenticationException {
         GoogleReader googleReader = new GoogleReader(PropertiesUtil.getProperty("auth.mail"),
-                                                     PropertiesUtil.getProperty("auth.password"));
+                PropertiesUtil.getProperty("auth.password"));
         googleReader.login();
         return googleReader;
     }
@@ -91,7 +90,7 @@ public class ReaderToKindle {
      * @throws SAXException                 ex
      * @throws IOException                  ex
      */
-    private List<Entry> parseRss(String data) throws ParserConfigurationException, SAXException, IOException {
+    private List<Entry> parseRss(String data) throws IllegalArgumentException, FeedException, IOException {
         return RssUtil.parseRssString(data);
     }
 
@@ -110,7 +109,7 @@ public class ReaderToKindle {
      * Sent to email
      *
      * @param document doc
-     * @throws EmailException  ex
+     * @throws EmailException      ex
      * @throws java.io.IOException ex
      */
     private void sendToEmail(Document document) throws IOException, EmailException {
