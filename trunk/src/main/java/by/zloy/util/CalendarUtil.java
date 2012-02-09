@@ -11,6 +11,6 @@ public class CalendarUtil {
     }
 
     public static String getTitleWithDate() {
-        return "Google Reader [" + getDate() + "]";
+        return "Reader " + getDate();
     }
 }
