@@ -71,7 +71,7 @@ public class ReaderToKindle {
      */
     private String getRssData(GoogleReader googleReader) throws GoogleReaderException {
         String userId = googleReader.getUserInformation().getUserId();
-        String feedId = "user/" + userId + PropertiesUtil.getProperty("kindle.reader.rss.label");
+        String feedId = "user/" + userId + "/label/" + PropertiesUtil.getProperty("kindle.reader.rss.label");
         String data = googleReader.getApi().getUnreadItems(feedId, Integer.parseInt(PropertiesUtil.getProperty("kindle.reader.count.new.rss")));
         if (Boolean.parseBoolean(PropertiesUtil.getProperty("kindle.reader.make.unread"))) {
             googleReader.markFeedAsRead(feedId);
