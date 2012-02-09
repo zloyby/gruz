@@ -38,6 +38,6 @@ public class Habrahabr implements CommonParser {
     }
 
     public boolean isInPoint(String criteria) {
-        return criteria != null && criteria.contains("www.habrahabr.ru");
+        return criteria != null && criteria.contains("habrahabr.ru");
     }
 }
