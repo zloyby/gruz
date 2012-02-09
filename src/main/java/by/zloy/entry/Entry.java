@@ -5,13 +5,13 @@ public class Entry {
     private String title;
     private String href;
     private String summary;
-    private String source;
+    private String sourceHref;
 
-    public Entry(String title, String href, String summary, String source) {
+    public Entry(String title, String href, String summary, String sourceHref) {
         this.title = title;
         this.href = href;
         this.summary = summary;
-        this.source = source;
+        this.sourceHref = sourceHref;
     }
 
     public String getTitle() {
@@ -26,7 +26,11 @@ public class Entry {
         return summary;
     }
 
-    public String getSource() {
-        return source;
+    public String getSourceHref() {
+        return sourceHref;
+    }
+
+    public void setSourceHref(String sourceHref) {
+        this.sourceHref = sourceHref;
     }
 }
