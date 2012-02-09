@@ -10,19 +10,9 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,14 +44,14 @@ public enum RssUtil {
         List<Entry> entries = new ArrayList<Entry>();
 
         SyndFeed feed = parseFeed(data);
+        String url = feed.getLink();
 
         for (Object object : feed.getEntries()) {
             SyndEntry entry = (SyndEntry) object;
             String title = entry.getTitle();
             String href = entry.getLink();
             String summary = entry.getDescription().getValue();
-            String source = "src";
-            entries.add(new Entry(title, href, summary, source));
+            entries.add(new Entry(title, href, summary, url));
         }
         return entries;
     }
