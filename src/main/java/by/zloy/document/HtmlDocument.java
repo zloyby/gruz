@@ -1,7 +1,6 @@
 package by.zloy.document;
 
 import by.zloy.entry.Entry;
-import by.zloy.util.PropertiesUtil;
 import by.zloy.util.RssUtil;
 import by.zloy.entry.parser.CommonParser;
 import by.zloy.util.CalendarUtil;
