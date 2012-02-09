@@ -19,12 +19,11 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressWarnings({"UnusedDeclaration"})
 public enum RssUtil {
+
     HABRAHABR(new Habrahabr()),
     LIVEJOURNAL(new LiveJournal());
 
-    private String url;
     private CommonParser parser;
 
     RssUtil(CommonParser parser) {
