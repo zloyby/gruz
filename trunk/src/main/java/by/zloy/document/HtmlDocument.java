@@ -1,6 +1,7 @@
 package by.zloy.document;
 
 import by.zloy.entry.Entry;
+import by.zloy.util.PropertiesUtil;
 import by.zloy.util.RssUtil;
 import by.zloy.entry.parser.CommonParser;
 import by.zloy.util.CalendarUtil;
@@ -37,7 +38,7 @@ public class HtmlDocument implements Document {
         StringBuilder sb = new StringBuilder();
         sb.append(createDocumentHeader());
         for (Entry entry : entries) {
-            String href = entry.getSource();
+            String href = entry.getSourceHref();
             CommonParser commonParser = RssUtil.getParserClass(href);
             sb.append(commonParser.createDocumentBody(entry));
         }
