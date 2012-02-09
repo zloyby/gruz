@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class CalendarUtil {
+    public static final SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH-mm");
 
     public static String getDate() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy.MM.dd HH-mm");
         return format.format(new Date());
     }
 
