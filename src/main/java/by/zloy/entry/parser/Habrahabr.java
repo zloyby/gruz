@@ -8,4 +8,8 @@ public class Habrahabr implements CommonParser {
         String href = entry.getHref();
         return href + "TODO: parse html page";
     }
+
+    public boolean isInPoint(String criteria) {
+        return "http://www.habrahabr.ru/rss/main/".equalsIgnoreCase(criteria);
+    }
 }
