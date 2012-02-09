@@ -42,16 +42,13 @@ public enum RssUtil {
 
     public static List<Entry> parseRssString(String data) throws IllegalArgumentException, FeedException, IOException {
         List<Entry> entries = new ArrayList<Entry>();
-
         SyndFeed feed = parseFeed(data);
-        String url = feed.getLink();
-
         for (Object object : feed.getEntries()) {
             SyndEntry entry = (SyndEntry) object;
             String title = entry.getTitle();
             String href = entry.getLink();
             String summary = entry.getDescription().getValue();
-            entries.add(new Entry(title, href, summary, url));
+            entries.add(new Entry(title, href, summary));
         }
         return entries;
     }

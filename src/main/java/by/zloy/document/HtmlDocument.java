@@ -38,8 +38,7 @@ public class HtmlDocument implements Document {
         StringBuilder sb = new StringBuilder();
         sb.append(createDocumentHeader());
         for (Entry entry : entries) {
-            String href = entry.getSourceHref();
-            CommonParser commonParser = RssUtil.getParserClass(href);
+            CommonParser commonParser = RssUtil.getParserClass(entry.getHref());
             sb.append(commonParser.createDocumentBody(entry));
         }
         sb.append(createDocumentFooter());
