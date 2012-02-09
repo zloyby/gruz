@@ -5,6 +5,11 @@ import by.zloy.entry.parser.CommonParser;
 import by.zloy.entry.parser.CommonParserImpl;
 import by.zloy.entry.parser.Habrahabr;
 import by.zloy.entry.parser.LiveJournal;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -14,8 +19,10 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,22 +46,22 @@ public enum RssUtil {
         return new CommonParserImpl();
     }
 
-    public static List<Entry> parseRssString(String data) throws ParserConfigurationException, IOException, SAXException {
+    private static SyndFeed parseFeed(String xml) throws IllegalArgumentException, FeedException, IOException {
+        return new SyndFeedInput().build(new XmlReader(new ByteArrayInputStream(xml.getBytes())));
+    }
+
+    public static List<Entry> parseRssString(String data) throws IllegalArgumentException, FeedException, IOException {
         List<Entry> entries = new ArrayList<Entry>();
-        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        InputSource is = new InputSource();
-        is.setCharacterStream(new StringReader(data));
 
-        Document doc = db.parse(is);
-        NodeList nodes = doc.getElementsByTagName("entry");
-        for (int i = 0; i < nodes.getLength(); i++) {
-            String title = ((Element) nodes.item(i)).getElementsByTagName("title").item(0).getFirstChild().getTextContent();
-            String href = ((Element) nodes.item(i)).getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getFirstChild().getTextContent();
-            String summary = ((Element) nodes.item(i)).getElementsByTagName("summary").item(0).getFirstChild().getTextContent();
-            String source = ((Element) ((Element) nodes.item(i)).getElementsByTagName("source").item(0)).getElementsByTagName("link").item(0).getAttributes().getNamedItem("href").getFirstChild().getTextContent();
+        SyndFeed feed = parseFeed(data);
 
-            Entry entry = new Entry(title, href, summary, source);
-            entries.add(entry);
+        for (Object object : feed.getEntries()) {
+            SyndEntry entry = (SyndEntry) object;
+            String title = entry.getTitle();
+            String href = entry.getLink();
+            String summary = entry.getDescription().getValue();
+            String source = "src";
+            entries.add(new Entry(title, href, summary, source));
         }
         return entries;
     }
