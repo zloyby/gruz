@@ -11,9 +11,7 @@ import by.zloy.util.PropertiesUtil;
 import by.zloy.util.SendMailSSLUtil;
 import com.sun.syndication.io.FeedException;
 import org.apache.commons.mail.EmailException;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.List;
 
@@ -86,9 +84,9 @@ public class ReaderToKindle {
      *
      * @param data string
      * @return list of entries
-     * @throws ParserConfigurationException ex
-     * @throws SAXException                 ex
-     * @throws IOException                  ex
+     * @throws IOException                          ex
+     * @throws com.sun.syndication.io.FeedException ex
+     * @throws IllegalArgumentException             ex
      */
     private List<Entry> parseRss(String data) throws IllegalArgumentException, FeedException, IOException {
         return RssUtil.parseRssString(data);
