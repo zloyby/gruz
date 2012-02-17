@@ -1,13 +1,9 @@
-package by.zloy.entry.parser;
+package by.zloy.reader.entry.parser;
 
-import by.zloy.entry.Entry;
+import by.zloy.reader.entry.Entry;
 
-/**
- * User: ArthurPoleshchuk
- * Date: 2/9/12
- * Time: 11:57 AM
- */
-public class LiveJournal implements CommonParser {
+public class CommonParserImpl implements CommonParser {
+
     public String createDocumentBody(Entry entry) {
         StringBuilder sb = new StringBuilder();
         sb.append("<div><h3>")
@@ -19,6 +15,6 @@ public class LiveJournal implements CommonParser {
     }
 
     public boolean isInPoint(String criteria) {
-        return criteria != null && criteria.contains("livejournal.com");
+        return false;
     }
 }

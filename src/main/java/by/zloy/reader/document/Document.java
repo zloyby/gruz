@@ -1,4 +1,4 @@
-package by.zloy.document;
+package by.zloy.reader.document;
 
 import java.io.File;
 import java.io.IOException;

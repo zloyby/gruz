@@ -1,9 +1,9 @@
-package by.zloy.document;
+package by.zloy.reader.document;
 
-import by.zloy.entry.Entry;
-import by.zloy.util.RssUtil;
-import by.zloy.entry.parser.CommonParser;
-import by.zloy.util.CalendarUtil;
+import by.zloy.reader.entry.Entry;
+import by.zloy.reader.util.RssUtil;
+import by.zloy.reader.entry.parser.CommonParser;
+import by.zloy.reader.util.CalendarUtil;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

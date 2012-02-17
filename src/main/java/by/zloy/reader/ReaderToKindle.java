@@ -1,14 +1,14 @@
-package by.zloy;
+package by.zloy.reader;
 
 import be.lechtitseb.google.reader.api.core.GoogleReader;
 import be.lechtitseb.google.reader.api.model.exception.AuthenticationException;
 import be.lechtitseb.google.reader.api.model.exception.GoogleReaderException;
-import by.zloy.document.Document;
-import by.zloy.document.HtmlDocument;
-import by.zloy.entry.Entry;
-import by.zloy.util.RssUtil;
-import by.zloy.util.PropertiesUtil;
-import by.zloy.util.SendMailSSLUtil;
+import by.zloy.reader.document.Document;
+import by.zloy.reader.document.HtmlDocument;
+import by.zloy.reader.entry.Entry;
+import by.zloy.reader.util.RssUtil;
+import by.zloy.reader.util.PropertiesUtil;
+import by.zloy.reader.util.SendMailSSLUtil;
 import com.sun.syndication.io.FeedException;
 import org.apache.commons.mail.EmailException;
 

@@ -1,4 +1,4 @@
-package by.zloy.util;
+package by.zloy.reader.util;
 
 import java.util.ResourceBundle;
 
