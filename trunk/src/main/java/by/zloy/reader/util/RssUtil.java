@@ -1,10 +1,10 @@
-package by.zloy.util;
+package by.zloy.reader.util;
 
-import by.zloy.entry.Entry;
-import by.zloy.entry.parser.CommonParser;
-import by.zloy.entry.parser.CommonParserImpl;
-import by.zloy.entry.parser.Habrahabr;
-import by.zloy.entry.parser.LiveJournal;
+import by.zloy.reader.entry.Entry;
+import by.zloy.reader.entry.parser.CommonParser;
+import by.zloy.reader.entry.parser.CommonParserImpl;
+import by.zloy.reader.entry.parser.Habrahabr;
+import by.zloy.reader.entry.parser.LiveJournal;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;

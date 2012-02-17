@@ -1,4 +1,4 @@
-package by.zloy.entry;
+package by.zloy.reader.entry;
 
 public class Entry {
 

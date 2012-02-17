@@ -1,6 +1,6 @@
-package by.zloy.entry.parser;
+package by.zloy.reader.entry.parser;
 
-import by.zloy.entry.Entry;
+import by.zloy.reader.entry.Entry;
 import net.htmlparser.jericho.Element;
 import net.htmlparser.jericho.HTMLElementName;
 import net.htmlparser.jericho.Segment;

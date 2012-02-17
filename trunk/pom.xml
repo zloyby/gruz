@@ -75,7 +75,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>by.zloy.ReaderToKindle</mainClass>
+                            <mainClass>by.zloy.reader.ReaderToKindle</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

@@ -1,6 +1,6 @@
-package by.zloy.util;
+package by.zloy.reader.util;
 
-import by.zloy.document.Document;
+import by.zloy.reader.document.Document;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.EmailAttachment;
 import org.apache.commons.mail.EmailException;
