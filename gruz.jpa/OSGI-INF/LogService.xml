@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="false" name="LogService">
+   <implementation class="by.zloy.osgi.jpa.impl.LogServiceImpl"/>
+   <service>
+      <provide interface="by.zloy.osgi.jpa.api.LogService"/>
+   </service>
+</scr:component>

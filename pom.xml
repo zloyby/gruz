@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>by.zloy.gruz</groupId>
+  <artifactId>gruz.agreggator</artifactId>
+  <version>1.0.0.qualifier</version>
+  <packaging>pom</packaging>
+  <name>gruz.agreggator</name>
+  
+  <modules>
+    <module>gruz.auth</module>
+	<module>gruz.feature</module>
+    <module>gruz.jpa</module>
+	<module>gruz.lib</module>
+	<module>gruz.model</module>
+	<module>gruz.parent</module>
+	<module>gruz.rcp</module>
+	<module>gruz.web</module>
+	<module>org.eclipse.persistence.derby</module>
+  </modules>
+  
+</project>

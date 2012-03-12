@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="JpaProvider">
+   <implementation class="by.zloy.rcp.jpa.JpaProvider"/>
+   <reference bind="setLogService" cardinality="1..1" interface="by.zloy.osgi.jpa.api.LogService" name="LogService" policy="dynamic" unbind="unsetLogService"/>
+   <reference bind="setUserService" cardinality="1..1" interface="by.zloy.osgi.jpa.api.UserService" name="UserService" policy="dynamic" unbind="unsetUserService"/>
+</scr:component>
