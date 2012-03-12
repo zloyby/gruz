@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: gruz.model
+Bundle-SymbolicName: gruz.model
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: javax.persistence;jpa="2.0";version="2.0.3"
+Export-Package: by.zloy.model
+Bundle-ActivationPolicy: lazy

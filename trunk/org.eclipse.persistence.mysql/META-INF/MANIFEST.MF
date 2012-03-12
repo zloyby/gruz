@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mysql Plug-in
+Bundle-SymbolicName: connector.mysql
+Bundle-Version: 5.1.18
+Bundle-ClassPath: external:$MARIA_HOME$/connector/mysql-connector-java-5.1.18-bin.jar
+Bundle-Vendor: Mysql
+Export-Package: com.mysql.jdbc
