@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>by.zloy</groupId>
     <version>0.0.1-SNAPSHOT</version>
-    <artifactId>gruz</artifactId>
+    <artifactId>gruz.core</artifactId>
     <name>Google Reader to Kindle</name>
 
     <properties>
