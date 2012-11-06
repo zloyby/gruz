@@ -7,6 +7,12 @@
     <artifactId>gruz.core</artifactId>
     <name>Google Reader to Kindle</name>
 
+    <parent>
+        <groupId>by.zloy</groupId>
+        <artifactId>gruz</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
