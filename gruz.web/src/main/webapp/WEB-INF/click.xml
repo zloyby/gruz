@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <click-app>
+    <headers>
+        <header name="Content-Type" value="text/html;charset=UTF-8"/>
+    </headers>
     <pages package="by.zloy"/>
     <mode value="debug"/>
 </click-app>
