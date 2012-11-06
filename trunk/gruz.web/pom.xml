@@ -39,6 +39,12 @@
             <version>2.3.0</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>by.zloy</groupId>
+            <artifactId>gruz.core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>gruz.web</finalName>
