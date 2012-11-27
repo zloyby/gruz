@@ -3,11 +3,11 @@ body {
 }
 
 #header {
-    background-color: #243b80;
+    background-color: rgba(62, 85, 128, 0.42);
 }
 
 #footer {
-    background-color: #243b80;
+    background-color: rgba(62, 85, 128, 0.42);
 }
 
 #title {
