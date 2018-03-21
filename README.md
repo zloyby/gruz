@@ -1,11 +1,6 @@
 # Allows to send your rss data from Google Reader to Kindle
-============
-## Seems that GReader will be closed, so unfortunately need to rewrite all this code :) 
-## Looking for another free rss reader...
-============
 
-## Common information
-
+## Seems that GReader will be closed, so unfortunately need to rewrite all this code :) Looking for another free rss reader...
 Now there is done only console version of application - see only 'gruz.core' folder, all other features are only for future implementation.
 
 ### TODO:
