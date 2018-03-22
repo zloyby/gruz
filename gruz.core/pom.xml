@@ -17,13 +17,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <repositories>
+    <!--<repositories>
         <repository>
             <id>be.lechtitseb.google</id>
             <name>Google Reader Unofficial API</name>
             <url>http://operden.googlecode.com/svn/trunk/m2/</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <dependencies>
         <dependency>
